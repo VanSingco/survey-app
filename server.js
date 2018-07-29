@@ -6,7 +6,7 @@ const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 const passport = require('passport')
 
-const {database, secret} = require('./server/config/secret')
+const {database, secret} = require('./config/secret')
 
 const app = express();
 
@@ -26,8 +26,8 @@ const sessionMiddleware = session({
     store: sessionStore
 })
 // passport facebook auth and google auth
-require('./server/passport/passport-facebook');
-require('./server/passport/passport-google');
+require('./passport/passport-facebook');
+require('./passport/passport-google');
 
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -41,8 +41,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-require('./server/routes/user')(app, passport);
-require('./server/routes/billing')(app);
+require('./routes/user')(app, passport);
+require('./routes/billing')(app);
 
 
 if (process.env.NODE_ENV === 'production') {

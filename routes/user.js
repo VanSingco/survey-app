@@ -1,12 +1,5 @@
 
 module.exports = (app, passport) => {
-    app.get('/', (req, res) => {
-        if (req.user) {
-            res.send('login');
-        } else {
-            res.send('not login');
-        };
-    })
     // facebook authentication
     app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
     app.get('/auth/facebook/callback', passport.authenticate('facebook', {
@@ -29,7 +22,6 @@ module.exports = (app, passport) => {
     app.get('/api/current_user', (req, res) => {
         res.send(req.user);
     })
-
     // logout
      app.get('/api/logout', (req, res) => {
         req.logout();
