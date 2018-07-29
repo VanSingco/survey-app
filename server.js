@@ -44,17 +44,6 @@ app.use(passport.session());
 require('./server/routes/user')(app, passport);
 require('./server/routes/billing')(app);
 
-   // google authentication
-   app.get('/auth/google', passport.authenticate('google', {
-       scope: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/plus.profile.emails.read']
-   }));
-   app.get('/auth/google/callback', passport.authenticate('google', {
-       failureRedirect: '/signup',
-       failureFlash: true
-   }), (req, res) => {
-       return res.redirect('/');
-   });
-
 
 if (process.env.NODE_ENV === 'production') {
 
