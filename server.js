@@ -40,14 +40,6 @@ app.use(sessionMiddleware);
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/', (req, res) => {
-    if (req.user) {
-        return res.send('home your login');
-    } else {
-        return res.send('Landing page');
-    }
-})
-
 
 require('./server/routes/user')(app, passport);
 require('./server/routes/billing')(app);
