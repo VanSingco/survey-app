@@ -12,6 +12,7 @@ const UserSchema= new Schema({
     facebook: {type:String, default: ''},
     fbTokens: Array,
     google:{type:String, default: ''},
+    credits: {type: Number, default: 0}
 });
 
 UserSchema.pre('save', function(next){

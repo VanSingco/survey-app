@@ -3,9 +3,9 @@ const User = require('../models/user');
 module.exports = (app, passport) => {
 
      // logout
-     app.get('/logout', (req, res) => {
+     app.get('/api/logout', (req, res) => {
         req.logout();
-        res.send('landing page')
+        res.redirect('/');
     });
     // facebook authentication
     app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
@@ -13,11 +13,7 @@ module.exports = (app, passport) => {
         failureRedirect: '/signup',
         failureFlash: true
     }), (req, res) => {
-        if (req.user) {
-             return res.send('Home you are loggin');
-        } else {
-             return res.send('landing page');
-        }
+         res.redirect('/');   
     });
       // google authentication
     app.get('/auth/google', passport.authenticate('google', {
@@ -27,10 +23,10 @@ module.exports = (app, passport) => {
         failureRedirect: '/signup',
         failureFlash: true
     }), (req, res) => {
-         if (req.user) {
-             return res.send('Home you are loggin');
-         } else {
-             return res.send('landing page');
-         }
+        return res.redirect('/');   
     });
+
+    app.get('/api/current_user', (req, res) => {
+        res.send(req.user);
+    })
 }

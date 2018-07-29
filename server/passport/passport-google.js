@@ -28,9 +28,11 @@ passport.use(new GoogleStrategy({
         newUser.fullname = profile.displayName;
         newUser.username = profile.name.givenName.replace(/\s/g, ''); // remove space;
         newUser.photo = profile._json.image.url;
+
         newUser.save((err) => {
             if(err) return done(err);
             return done(null, newUser);
         });
+        
     }).catch(err => done(err));
 }));    
